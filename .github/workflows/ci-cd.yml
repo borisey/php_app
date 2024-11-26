@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   # Задача для установки зависимостей
-  build:
+  build-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -12,11 +12,19 @@ jobs:
       - uses: php-actions/composer@v6
       - run: echo "Composer dependencies have been installed"
   # Задача для тестирования
-  test:
+      - run: vendor/bin/phpunit --verbose tests
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: vendor/bin/phpunit --verbose tests
+      # Загружаю созданные файлы
+      - uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build
-
+          name: build-artifact
+          path: /tmp/github-actions
+      # Деплою на сервер
+      - uses: php-actions/deploy
+        with:
+          hostname: example.com
+          user: webdeploy
+          path: /var/www/example.com
+          ssh_key: { { secrets.deploy_ssh_key } }
