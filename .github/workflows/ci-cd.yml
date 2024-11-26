@@ -15,7 +15,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: vendor/bin/phpunit --verbose tests
+      - uses: actions/download-artifact@v2
         with:
           name: build
           path: build
+        run: vendor/bin/phpunit --verbose tests
