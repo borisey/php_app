@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace src;
 
 class Greeter {
     public function greet(string $name = null): string

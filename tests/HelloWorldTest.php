@@ -1,7 +1,9 @@
 <?php
 
-use App\Greeter;
+require __DIR__ . '/..' . "/src/Greeter.php";
+
 use PHPUnit\Framework\TestCase;
+use src\Greeter;
 
 final class HelloWorldTest extends TestCase
 {
@@ -12,17 +14,17 @@ final class HelloWorldTest extends TestCase
             $greeter->greet()
         );
     }
-//
-//    public function testGreeterUsesName() {
-//        $greeter = new Greeter();
-//
-//        self::assertStringContainsString(
-//            "Hello, Cody",
-//            $greeter->greet("Cody")
-//        );
-//        self::assertStringContainsString(
-//            "Hello, Sarah",
-//            $greeter->greet("Sarah")
-//        );
-//    }
+
+    public function testGreeterUsesName() {
+        $greeter = new Greeter();
+
+        self::assertStringContainsString(
+            "Hello, Alex",
+            $greeter->greet("Alex")
+        );
+        self::assertStringContainsString(
+            "Hello, Sarah",
+            $greeter->greet("Sarah")
+        );
+    }
 }
