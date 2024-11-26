@@ -15,12 +15,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: build
-      - name: Run testing
-        run: vendor/bin/phpunit --verbose tests
+      - run: vendor/bin/phpunit --verbose tests
         with:
           name: build
           path: build
