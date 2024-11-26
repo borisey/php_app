@@ -28,5 +28,5 @@ jobs:
       - name: Deploy to server
         run: |
           echo "Starting deployment..."
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no borisey@IP "cd /home/test && git pull origin main"
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no borisey@95.142.44.94 "cd /var/www/html/php_app && git pull origin main"
           echo "Deployment completed."
