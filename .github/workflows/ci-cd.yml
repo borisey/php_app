@@ -16,15 +16,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Загружаю созданные файлы
-      - uses: actions/upload-artifact@v3
+      - uses: actions/checkout@v1
+      - name: Push to server
+        uses: test/ssh-action@main
         with:
-          name: build-artifact
-          path: /tmp/github-actions
-      # Деплою на сервер
-      - uses: php-actions/deploy
-        with:
-          hostname: example.com
-          user: webdeploy
-          path: /var/www/example.com
-          ssh_key: { { secrets.deploy_ssh_key } }
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: cd ${{ secrets.PROJECT_PATH }} && git pull
