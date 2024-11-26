@@ -6,6 +6,7 @@ jobs:
   # Задача для установки зависимостей
   install:
     runs-on: ubuntu-latest
+    steps:
      - uses: actions/checkout@v3
      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
      - uses: php-actions/composer@v6
@@ -13,6 +14,5 @@ jobs:
   # Задача для тестирования
   test:
     runs-on: ubuntu-latest
-
     steps:
       - run: vendor/bin/phpunit --verbose tests
