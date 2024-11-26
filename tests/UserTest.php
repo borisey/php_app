@@ -2,7 +2,13 @@
 
 use PHPUnit\Framework\TestCase;
 
-final class UserTest extends TestCase
+final class HelloWorldTest extends TestCase
 {
-    // Tests will go here
+    public function testGreeting() {
+
+        $greeting = "Hello world";
+        $requiredGreeting = "Hello world";
+
+        $this->assertEquals($greeting, $requiredGreeting);
+    }
 }
