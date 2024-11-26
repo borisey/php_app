@@ -1,4 +1,6 @@
 <?php
 
-$greeter = new \src\Greeter;
+use src\Greeter;
+
+$greeter = new Greeter;
 echo $greeter->greet();
