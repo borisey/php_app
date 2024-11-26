@@ -13,5 +13,6 @@ jobs:
       - run: echo "Composer dependencies have been installed"
   # Задача для тестирования
   test:
+    runs-on: ubuntu-latest
     steps:
       - run: vendor/bin/phpunit --verbose tests
