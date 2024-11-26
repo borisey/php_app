@@ -21,4 +21,7 @@ jobs:
           path: build
       - name: Run testing
         run: vendor/bin/phpunit --verbose tests
+        with:
+          name: build
+          path: build
 
