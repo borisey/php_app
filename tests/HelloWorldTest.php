@@ -10,7 +10,7 @@ final class HelloWorldTest extends TestCase
     public function testGreeterSaysHello() {
         $greeter = new Greeter();
         self::assertStringContainsString(
-            "Hello",
+            "Hello!",
             $greeter->greet()
         );
     }
