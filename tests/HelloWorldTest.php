@@ -1,20 +1,28 @@
 <?php
 
+use App\Greeter;
 use PHPUnit\Framework\TestCase;
 
 final class HelloWorldTest extends TestCase
 {
-    public function testResponseCode()
-    {
-        $this->assertEquals(200, http_response_code());
+    public function testGreeterSaysHello() {
+        $greeter = new Greeter();
+        self::assertStringContainsString(
+            "Hello",
+            $greeter->greet()
+        );
     }
-
-    public function testGreeting()
-    {
-
-        $greeting = "Hello world";
-        $requiredGreeting = "Hello world";
-
-        $this->assertEquals($greeting, $requiredGreeting);
-    }
+//
+//    public function testGreeterUsesName() {
+//        $greeter = new Greeter();
+//
+//        self::assertStringContainsString(
+//            "Hello, Cody",
+//            $greeter->greet("Cody")
+//        );
+//        self::assertStringContainsString(
+//            "Hello, Sarah",
+//            $greeter->greet("Sarah")
+//        );
+//    }
 }
