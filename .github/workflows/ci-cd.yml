@@ -13,10 +13,21 @@ jobs:
       - uses: php-actions/composer@v6
       - run: echo "Composer dependencies have been installed"
   # Задача для тестирования
-  test:
+  test-ubuntu:
     # Задача для тестирования выполняется только после успешного завершения задачи для установке зависимостей
     needs: build
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+      - uses: php-actions/composer@v6
+      - run: echo "Composer dependencies have been installed"
+      - run: vendor/bin/phpunit --verbose tests
+  test-windows:
+    # Задача для тестирования выполняется только после успешного завершения задачи для установке зависимостей
+    needs: test-ubuntu
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/checkout@v4
