@@ -6,13 +6,13 @@ jobs:
   # Задача для установки зависимостей
   build:
     # Указываю, на какой операционной системе будет выполняться задача
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       # Клонирую репозиторий в рабочую директорию
       - uses: actions/checkout@v4
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       # Выполняю команду "composer install" для установки необходимых зависимостей
-      - uses: php-actions/composer@v6
+      - uses: php-actions/composer@v4
       - run: echo "Composer dependencies have been installed"
   # Задача для тестирования
   test:
