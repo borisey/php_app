@@ -31,13 +31,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4 # Клонирую репозиторий в рабочую директорию
       - name: Set up SSH key
-        run: | # Добавляю SSH ключ в файлы ~/.ssh/id_rsa и ~/.ssh/known_hosts
+        run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
       - name: Deploy to server
-        run: | # Подключаюсь к серверу по SSH и выполняю команду "git pull origin main"
+        run: |
           echo "Starting deployment..."
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no borisey@95.142.44.94 "cd /var/www/html/php_app && git pull origin main"
           echo "Deployment completed."
