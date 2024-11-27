@@ -20,11 +20,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
       # Клонирую репозиторий в рабочую директорию
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       # Выполняю команду "composer install" для установки необходимых зависимостией
-      - uses: php-actions/composer@v6
+      - name: Checkout code
+        uses: php-actions/composer@v6
       - run: echo "Composer dependencies have been installed"
       - run: vendor/bin/phpunit --verbose tests
   # Задача для деплоя
@@ -36,8 +38,8 @@ jobs:
       - name: Checkout code
         # Клонирую репозиторий в рабочую директорию
         uses: actions/checkout@v4
-        # Добавляю SSH ключ в файлы ~/.ssh/id_rsa и ~/.ssh/known_hosts
       - name: Set up SSH key
+        # Добавляю SSH ключ в файлы ~/.ssh/id_rsa и ~/.ssh/known_hosts
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
