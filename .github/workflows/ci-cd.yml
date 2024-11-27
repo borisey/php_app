@@ -38,7 +38,7 @@ jobs:
   # Задача для деплоя
   deploy:
     # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
-    needs: test
+    needs: test-windows
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
