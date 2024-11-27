@@ -15,7 +15,8 @@ jobs:
       # Выполняю команду "composer install" для установки необходимых зависимостией
       - name: Checkout code
         uses: php-actions/composer@v6
-        run: echo "Composer dependencies have been installed"
+        run: | 
+          echo "Composer dependencies have been installed"
   # Задача для тестирования
   test:
     # Задача для тестирования выполняется только после успешного завершения задачи для установке зависимостей
