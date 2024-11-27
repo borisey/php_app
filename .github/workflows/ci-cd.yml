@@ -25,7 +25,7 @@ jobs:
       - run: echo "Composer dependencies have been installed"
       - run: vendor/bin/phpunit --verbose tests
   deploy: # Задача для деплоя
-    needs: test-ubuntu # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
+    needs: test # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
     runs-on: ubuntu-latest # Указываю, на какой операционной системе будет выполняться задача
     steps:
       - name: Checkout code
