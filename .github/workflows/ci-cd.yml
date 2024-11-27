@@ -13,7 +13,7 @@ jobs:
       - uses: php-actions/composer@v6 # Выполняю команду "composer install" для установки необходимых зависимостией
       - run: echo "Composer dependencies have been installed"
   # Задача для тестирования
-  test-ubuntu:
+  test:
     needs: build # Задача для тестирования выполняется только после успешного завершения задачи для установке зависимостей
     runs-on: ubuntu-latest # Указываю, на какой операционной системе будет выполняться задача
     steps:
