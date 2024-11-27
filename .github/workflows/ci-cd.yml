@@ -9,44 +9,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Клонирую репозиторий в рабочую директорию
-      - uses: actions/checkout@v4
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+      - name: Checkout code
+        uses: actions/checkout@v4
+        run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       # Выполняю команду "composer install" для установки необходимых зависимостией
-      - uses: php-actions/composer@v6
-      - run: echo "Composer dependencies have been installed"
+      - name: Checkout code
+        uses: php-actions/composer@v6
+        run: echo "Composer dependencies have been installed"
   # Задача для тестирования
   test:
     # Задача для тестирования выполняется только после успешного завершения задачи для установке зависимостей
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
       # Клонирую репозиторий в рабочую директорию
+      - name: Checkout code
         uses: actions/checkout@v4
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+        run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       # Выполняю команду "composer install" для установки необходимых зависимостией
       - name: Checkout code
         uses: php-actions/composer@v6
-      - run: echo "Composer dependencies have been installed"
-      - run: vendor/bin/phpunit --verbose tests
+        run: |
+          echo "Composer dependencies have been installed"
+          vendor/bin/phpunit --verbose tests
   # Задача для деплоя
   deploy:
     # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
     needs: test
     runs-on: ubuntu-latest
     steps:
+      # Клонирую репозиторий в рабочую директорию
       - name: Checkout code
-        # Клонирую репозиторий в рабочую директорию
         uses: actions/checkout@v4
+      # Добавляю SSH ключ в файлы ~/.ssh/id_rsa и ~/.ssh/known_hosts
       - name: Set up SSH key
-        # Добавляю SSH ключ в файлы ~/.ssh/id_rsa и ~/.ssh/known_hosts
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+      # Подключаюсь к серверу по SSH и выполняю команду "git pull origin main"
       - name: Deploy to server
-        # Подключаюсь к серверу по SSH и выполняю команду "git pull origin main"
         run: |
           echo "Starting deployment..."
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no borisey@95.142.44.94 "cd /var/www/html/php_app && git pull origin main"
