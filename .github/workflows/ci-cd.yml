@@ -23,13 +23,12 @@ jobs:
       # Клонирую репозиторий в рабочую директорию
       - name: Checkout code
         uses: actions/checkout@v4
-        run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       # Выполняю команду "composer install" для установки необходимых зависимостией
       - name: Checkout code
         uses: php-actions/composer@v6
-        run: |
-          echo "Composer dependencies have been installed"
-          vendor/bin/phpunit --verbose tests
+      - run: echo "Composer dependencies have been installed"
+      - run: vendor/bin/phpunit --verbose tests
   # Задача для деплоя
   deploy:
     # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
