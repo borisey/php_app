@@ -24,19 +24,8 @@ jobs:
       - uses: php-actions/composer@v6 # Выполняю команду "composer install" для установки необходимых зависимостией
       - run: echo "Composer dependencies have been installed"
       - run: vendor/bin/phpunit --verbose tests
-  test-windows:
-    needs: test-ubuntu # Задача для тестирования выполняется только после успешного завершения задачи для установке зависимостей
-    runs-on: windows-latest # Указываю, на какой операционной системе будет выполняться задача
-    steps:
-      - name: Checkout code
-      - uses: actions/checkout@v4 # Клонирую репозиторий в рабочую директорию
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - name: Composer install
-      - uses: php-actions/composer@v6 # Выполняю команду "composer install" для установки необходимых зависимостией
-      - run: echo "Composer dependencies have been installed"
-      - run: vendor/bin/phpunit --verbose tests
   deploy: # Задача для деплоя
-    needs: test-windows # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
+    needs: test-ubuntu # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
     runs-on: ubuntu-latest # Указываю, на какой операционной системе будет выполняться задача
     steps:
       - name: Checkout code
