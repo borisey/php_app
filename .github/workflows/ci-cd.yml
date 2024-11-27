@@ -6,7 +6,11 @@ jobs:
   # Задача для установки зависимостей
   build:
     # Указываю, на какой операционной системе будет выполняться задача
-    runs-on: windows-latest
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest, macos-latest, windows-latest ]
+        php-versions: [ '7.3', '7.4' ]
     steps:
       # Клонирую репозиторий в рабочую директорию
       - uses: actions/checkout@v4
