@@ -11,7 +11,7 @@ jobs:
       # Клонирую репозиторий в рабочую директорию
       - uses: actions/checkout@v4
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      # Выполняю команду "composer install" для установки необходимых зависимостией
+      # Выполняю команду "composer install" для установки необходимых зависимостей
       - uses: php-actions/composer@v6
       - run: echo "Composer dependencies have been installed"
   # Задача для тестирования
@@ -24,7 +24,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      # Выполняю команду "composer install" для установки необходимых зависимостией
+      # Выполняю команду "composer install" для установки необходимых зависимостей
       - name: Checkout code
         uses: php-actions/composer@v6
       - run: echo "Composer dependencies have been installed"
