@@ -35,6 +35,11 @@ jobs:
           ini-values: "post_max_size=256M" #optional
       - name: Check PHP Version
         run: php -v
+      # Выполняю команду "composer install" для установки необходимых зависимостей
+      - name: Checkout code
+        uses: php-actions/composer@v6
+      - run: echo "Composer dependencies have been installed"
+      - run: vendor/bin/phpunit --verbose tests
   # Задача для деплоя
   deploy:
     # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
