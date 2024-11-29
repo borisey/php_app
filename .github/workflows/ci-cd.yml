@@ -21,22 +21,20 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
-        php-versions: [ '8.2' ]
-        phpunit-versions: [ 'latest' ]
-        include:
-          - operating-system: 'ubuntu-latest'
-            php-versions: '8.2'
+        operating-system: [ubuntu-latest, windows-latest, macOS-latest]
+        php-versions: ['7.2', '7.3']
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
-      # Клонирую репозиторий в рабочую директорию
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      # Выполняю команду "composer install" для установки необходимых зависимостей
-      - name: Checkout code
-        uses: php-actions/composer@v6
-      - run: echo "Composer dependencies have been installed"
-      - run: vendor/bin/phpunit --verbose tests
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: intl #optional
+          ini-values: "post_max_size=256M" #optional
+      - name: Check PHP Version
+        run: php -v
   # Задача для деплоя
   deploy:
     # Задача для деплоя выполняется только после успешного завершения задачи для тестированию
